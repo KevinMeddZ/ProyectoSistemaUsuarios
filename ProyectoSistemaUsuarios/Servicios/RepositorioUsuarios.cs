@@ -45,8 +45,7 @@ namespace ProyectoSistemaUsuarios.Servicios
 
             //BUSCA EL USUARIO POR CORREO EN LA BASE DE DATOS MEDIANTE UNA CONSULTA
             return await conexion.QuerySingleOrDefaultAsync<Usuario>(@"
-                                SELECT * FROM tblUsuario 
-                                WHERE Correo = @Correo", new { Correo });
+                   SELECT * FROM tblUsuario WHERE Correo = @Correo", new { Correo });
 
         }
 

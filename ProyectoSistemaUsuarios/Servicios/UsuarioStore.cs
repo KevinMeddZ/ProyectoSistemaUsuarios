@@ -16,9 +16,11 @@ namespace ProyectoSistemaUsuarios.Servicios
 
 
 
-        public Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
+        public async Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //SE UTILIZA EL SERVICIO DE USUARIOS PARA CREAR EL USUARIO
+            var idUser = await repositorioUsuarios.CrearUsuario(user);
+            return IdentityResult.Success;
         }
 
         public Task<IdentityResult> DeleteAsync(Usuario user, CancellationToken cancellationToken)
@@ -28,12 +30,13 @@ namespace ProyectoSistemaUsuarios.Servicios
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+
         }
 
-        public Task<Usuario?> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+        public async Task<Usuario?> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //BUSCA EL USUARIO POR EMAIL
+            return await repositorioUsuarios.BuscarUsuarioPorEmail(normalizedEmail);
         }
 
         public Task<Usuario?> FindByIdAsync(string userId, CancellationToken cancellationToken)
@@ -41,14 +44,16 @@ namespace ProyectoSistemaUsuarios.Servicios
             throw new NotImplementedException();
         }
 
-        public Task<Usuario?> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
+        public async Task<Usuario?> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //BUSCA EL USUARIO POR EMAIL
+            return await repositorioUsuarios.BuscarUsuarioPorEmail(normalizedUserName);
         }
 
         public Task<string?> GetEmailAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //RETORNA EL EMAIL DEL USUARIO
+            return Task.FromResult(user.Correo);
         }
 
         public Task<bool> GetEmailConfirmedAsync(Usuario user, CancellationToken cancellationToken)
@@ -68,17 +73,18 @@ namespace ProyectoSistemaUsuarios.Servicios
 
         public Task<string?> GetPasswordHashAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //RETORNA LA CONTRASEÑA DEL USUARIO
+            return Task.FromResult(user.Contrasena);
         }
 
         public Task<string> GetUserIdAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user.id.ToString());
         }
 
         public Task<string?> GetUserNameAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(user.Nombre);
         }
 
         public Task<bool> HasPasswordAsync(Usuario user, CancellationToken cancellationToken)
@@ -108,7 +114,9 @@ namespace ProyectoSistemaUsuarios.Servicios
 
         public Task SetPasswordHashAsync(Usuario user, string? passwordHash, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //CONVIERTE LA CONTRASEÑA DEL USUARIO EN UN HASH
+            user.Contrasena = passwordHash;
+            return Task.CompletedTask;
         }
 
         public Task SetUserNameAsync(Usuario user, string? userName, CancellationToken cancellationToken)
@@ -116,9 +124,11 @@ namespace ProyectoSistemaUsuarios.Servicios
             throw new NotImplementedException();
         }
 
-        public Task<IdentityResult> UpdateAsync(Usuario user, CancellationToken cancellationToken)
+        public async Task<IdentityResult> UpdateAsync(Usuario user, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            //ACTUALIZA LA CONTRASEÑA DEL USUARIO
+            await repositorioUsuarios.Actualizar(user);
+            return IdentityResult.Success;
         }
     }
 }
