@@ -15,11 +15,10 @@ namespace ProyectoSistemaUsuarios.Servicios
         }
 
 
-
         public async Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
         {
             //SE UTILIZA EL SERVICIO DE USUARIOS PARA CREAR EL USUARIO
-            var idUser = await repositorioUsuarios.CrearUsuario(user);
+            user.id = await repositorioUsuarios.CrearUsuario(user);
             return IdentityResult.Success;
         }
 
@@ -84,7 +83,7 @@ namespace ProyectoSistemaUsuarios.Servicios
 
         public Task<string?> GetUserNameAsync(Usuario user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.Nombre);
+            return Task.FromResult(user.Correo);
         }
 
         public Task<bool> HasPasswordAsync(Usuario user, CancellationToken cancellationToken)
@@ -104,12 +103,16 @@ namespace ProyectoSistemaUsuarios.Servicios
 
         public Task SetNormalizedEmailAsync(Usuario user, string? normalizedEmail, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            user.Correo = normalizedEmail;
+
+            return Task.CompletedTask;
         }
 
         public Task SetNormalizedUserNameAsync(Usuario user, string? normalizedName, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            user.Correo = normalizedName;
+
+            return Task.CompletedTask;
         }
 
         public Task SetPasswordHashAsync(Usuario user, string? passwordHash, CancellationToken cancellationToken)

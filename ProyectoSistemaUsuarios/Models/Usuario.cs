@@ -17,7 +17,7 @@ namespace ProyectoSistemaUsuarios.Models
 
         public string Contrasena { get; set; }
 
-        public int idRol {  get; set; }
+        public TipoRol idRol {  get; set; }
 
 
 
