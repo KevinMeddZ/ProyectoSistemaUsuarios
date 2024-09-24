@@ -10,7 +10,7 @@
 <div class="card">
     <div class="card-body">
 
-        <form asp-action="Registro">
+        <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -27,8 +27,6 @@
                 <input asp-for="Contrasena" type="password" class="form-control" />
                 <span asp-validation-for="Contrasena" class="text-danger"></span>
             </div>
-
-
 
             <button class="btn btn-primary">Iniciar sesión</button>
 

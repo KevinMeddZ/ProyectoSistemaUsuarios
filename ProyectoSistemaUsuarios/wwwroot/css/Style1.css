@@ -1,0 +1,76 @@
+﻿/* Estilo general para la barra lateral */
+.sidebar {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Usar flexbox para distribución */
+    flex-direction: column; /* Colocar elementos en columna */
+}
+
+/* Estilo para el título de la barra lateral */
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Estilo para los enlaces de la barra lateral */
+.sidebar nav a.nav-link {
+    color: white;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 1.1rem;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Estilo para los íconos */
+.sidebar nav a.nav-link i {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Hover para los enlaces */
+.sidebar nav a.nav-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
+}
+
+/* Estilo para el área de logout */
+.logout {
+    margin-top: auto; /* Empuja el área de logout hacia abajo */
+    width: 100%;
+}
+
+/* Estilo para el enlace de logout */
+.logout a.nav-link {
+    color: white;
+    background: rgba(255, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    display: block; /* Asegura que el enlace ocupe todo el ancho */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+/* Hover para logout */
+.logout a.nav-link:hover {
+    background: rgba(255, 0, 0, 1);
+    transform: translateX(5px);
+}
+
+/* Ajustes en el main para que no se superponga */
+.container {
+    margin-left: 270px;
+    padding: 20px;
+}
+

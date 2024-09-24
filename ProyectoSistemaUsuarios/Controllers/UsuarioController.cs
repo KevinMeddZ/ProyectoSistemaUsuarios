@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoSistemaUsuarios.Models;
 using ProyectoSistemaUsuarios.Servicios;
@@ -16,17 +18,23 @@ namespace ProyectoSistemaUsuarios.Controllers
             this.signInManager = signInManager;
         }
 
+
+
+
+        [AllowAnonymous]
         public IActionResult Registro()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Registro(RegistroUsuarioViewModel modelo)
         {
@@ -65,5 +73,36 @@ namespace ProyectoSistemaUsuarios.Controllers
 
         }
 
+
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel modelo)
+        {
+            //VALIDA EL MODELO
+            if (!ModelState.IsValid)
+            {
+                return View(modelo);
+            }
+
+            //MEDIANTE SIGNINMANAGER VALIDA LAS CREDENCIALES
+            var resultado = await signInManager.PasswordSignInAsync(modelo.Correo, modelo.Contrasena, true, lockoutOnFailure: false);
+
+            //SI EL RESULTADO ES EXITOSO...
+            if (resultado.Succeeded)
+            {
+                return RedirectToAction("index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Nombre de usuario o contraseña incorrecto");
+                return View(modelo);
+            }
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            return RedirectToAction("Login", "Usuario");
+        }
     }
 }

@@ -1,8 +1,20 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using ProyectoSistemaUsuarios.Models;
 using ProyectoSistemaUsuarios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//POLITICA DE USUARIOS AUTENTICADOS
+var politicaUsuariosAutenticados = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+
+//POLITICA DE USUARIOS AUTENTICADOS A NIVEL GLOBAL
+builder.Services.AddControllersWithViews(opciones =>
+{
+    opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosAutenticados));
+});
 
 
 // Add services to the container.
@@ -26,6 +38,19 @@ builder.Services.AddIdentityCore<Usuario>(opciones =>
     opciones.Password.RequireUppercase = false;
     opciones.Password.RequireNonAlphanumeric = false;
 });
+
+
+//CONFIGURAR EL USO DE COOKIES PARA AUTENTICACIÓN
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    options.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+}).AddCookie(IdentityConstants.ApplicationScheme, opciones =>
+{
+    opciones.LoginPath = "/Usuario/Login";
+});
+
 
 builder.Services.AddHttpContextAccessor();
 

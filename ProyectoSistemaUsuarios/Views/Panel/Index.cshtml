@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Usuario>
+@{
+    ViewData["Title"] = "Panel de usuarios";
+}
+
+<h1 class="text-center">Panel de usuarios</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Correo</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Editar" asp-route-id="@usuario.id">Editar</a>
+                    <a class="btn btn-danger" asp-action="Borrar" asp-route-id="@usuario.id">Eliminar</a>
+                    
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

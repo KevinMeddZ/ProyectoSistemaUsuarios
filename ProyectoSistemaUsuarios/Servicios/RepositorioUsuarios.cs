@@ -8,8 +8,11 @@ namespace ProyectoSistemaUsuarios.Servicios
     public interface IRepositorioUsuarios
     {
         Task Actualizar(Usuario usuario);
+        Task ActualizarUsuario(Usuario usuario);
         Task<Usuario> BuscarUsuarioPorEmail(string Correo);
         Task<int> CrearUsuario(Usuario usuario);
+        Task<Usuario> ObtenerUsuarioPorId(int id);
+        Task<IEnumerable<Usuario>> ObtenerUsuarios();
     }
 
     public class RepositorioUsuarios: IRepositorioUsuarios
@@ -56,5 +59,35 @@ namespace ProyectoSistemaUsuarios.Servicios
 
             await conexion.ExecuteAsync(@"UPDATE tblUsuario SET Contrasena = @Contrasena WHERE id = @id", usuario);
         }
+
+
+        //OBTIENE LOS USUARIOS EN UN ENUMERABLE
+        public async Task<IEnumerable<Usuario>> ObtenerUsuarios()
+        {
+            using var conexion = new SqlConnection(cadenaConexion);
+
+            return await conexion.QueryAsync<Usuario>(@"
+            SELECT * FROM tblUsuario");
+        }
+
+
+        public async Task<Usuario> ObtenerUsuarioPorId(int id)
+        {
+            using var conexion = new SqlConnection(cadenaConexion);
+
+            return await conexion.QueryFirstOrDefaultAsync<Usuario>(@"
+            SELECT * FROM tblUsuario WHERE id = @id", new {id});
+        }
+
+
+        //METODO PARA ACTUALIZAR EL USUARIO
+        public async Task ActualizarUsuario(Usuario usuario)
+        {
+            using var conexion = new SqlConnection(cadenaConexion);
+
+            await conexion.ExecuteAsync(@"UPDATE tblUsuario SET Nombre = @Nombre, idRol = @idRol WHERE id = @id", usuario);
+        }
+
+
     }
 }
