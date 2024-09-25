@@ -11,6 +11,7 @@ namespace ProyectoSistemaUsuarios.Servicios
         Task ActualizarUsuario(Usuario usuario);
         Task<Usuario> BuscarUsuarioPorEmail(string Correo);
         Task<int> CrearUsuario(Usuario usuario);
+        Task Eliminar(int id);
         Task<Usuario> ObtenerUsuarioPorId(int id);
         Task<IEnumerable<Usuario>> ObtenerUsuarios();
     }
@@ -86,6 +87,14 @@ namespace ProyectoSistemaUsuarios.Servicios
             using var conexion = new SqlConnection(cadenaConexion);
 
             await conexion.ExecuteAsync(@"UPDATE tblUsuario SET Nombre = @Nombre, idRol = @idRol WHERE id = @id", usuario);
+        }
+
+
+        public async Task Eliminar(int id)
+        {
+            using var conexion = new SqlConnection(cadenaConexion);
+
+            await conexion.ExecuteAsync(@"DELETE tblUsuario WHERE id = @id", new {id});
         }
 
 

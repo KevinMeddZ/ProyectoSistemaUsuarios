@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
 
 namespace ProyectoSistemaUsuarios.Models
@@ -19,10 +20,12 @@ namespace ProyectoSistemaUsuarios.Models
         [Required(ErrorMessage = "Se requiere el campo {0}")]
         public string Apellidos { get; set; }
 
+
         [Required(ErrorMessage = "Se requiere el campo {0}")]
         [Display(Name = "Contraseña")]
         public string Contrasena { get; set; }
 
+        [Display(Name = "Confirmar contraseña")]
         public string ConfirmarContrasena { get; set; }
 
 
