@@ -5,8 +5,77 @@
 }
 
 
-<h1>Acerca de</h1>
+<style>
 
-<br />
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-<h2>Kevin A. Núñez Méndez</h2>
+    .about-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 400px;
+        margin: auto;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    h3 {
+        color: #555;
+    }
+
+    .links {
+        margin-top: 20px;
+    }
+
+    .links a {
+        text-decoration: none;
+        background-color: #0077b5;
+        color: white;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 5px;
+        display: inline-block;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+    }
+
+    .links a.github {
+        background-color: #333;
+    }
+
+    .links a:hover {
+        opacity: 0.9;
+    }
+</style>
+
+<body>
+    <div class="about-container">
+        <h1>Acerca de</h1>
+        <br />
+        <h3>Creador: Kevin A. Núñez Méndez</h3>
+        <div class="links">
+            
+
+            <a href="https://www.linkedin.com/in/kevin-n%C3%BA%C3%B1ez-m%C3%A9ndez-7a599924b/" class="btn btn-primary" target="_blank">
+                
+                <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+            <a href="https://github.com/KevinMeddZ" class="github" target="_blank">
+                <i class="bi bi-github"></i> GitHub
+            </a>
+        </div>
+    </div>
+</body>
