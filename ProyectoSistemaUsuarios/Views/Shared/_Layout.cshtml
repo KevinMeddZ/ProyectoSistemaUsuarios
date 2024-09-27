@@ -1,8 +1,11 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
+    @using Microsoft.AspNetCore.Identity
+    @inject SignInManager<Usuario> SignInManager
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 
     <title>@ViewData["Title"] - ProyectoSistemaUsuarios</title>
     <!-- Carga de Bootstrap CSS -->
@@ -15,7 +18,7 @@
 
 </head>
 <body>
-
+    
     <div class="sidebar">
         <h2>Gestión de usuarios</h2>
         <nav>
@@ -27,6 +30,10 @@
         <div class="logout">
             <a class="nav-link" asp-controller="usuario" asp-action="logout"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
         </div>
+
+
+        <p class="align-content-center">@User.Identity.Name</p>
+
     </div>
 
     
